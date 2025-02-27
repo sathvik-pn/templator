@@ -1,13 +1,70 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>First Web Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Request Generator</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
-    Hello github page
+    <div class="container">
+        <h1>Deployment Request Generator</h1>
+        <div class="form-group">
+            <label for="service">Service</label>
+            <input type="text" id="service" placeholder="Enter the service name">
+            <a href="#" onclick="document.getElementById('service').value='hci-toolbox-va'; return false;">hci-toolbox-va</a>
+        </div>
+        <div class="form-group">
+            <label for="values-file">Values File</label>
+            <input type="text" id="values-file" placeholder="Enter the deployment yaml file">
+            <a href="#" onclick="document.getElementById('values-file').value='values.pc7165.va.yaml'; return false;">values.pc7165.va.yaml</a>
+        </div>
+        <div class="form-group">
+            <label for="chart-version">Chart Version</label>
+            <input type="text" id="chart-version" placeholder="Enter the chart/build version">
+            <a href="#" onclick="document.getElementById('chart-version').value='0.0.343-0-gf3b4160'; return false;">0.0.343-0-gf3b4160</a>
+        </div>
+        <div class="form-group">
+            <label for="hci-toolbox-pr">HCI-Toolbox PR</label>
+            <input type="text" id="hci-toolbox-pr" placeholder="Enter the HCI-Toolbox PR URL">
+            <a href="https://github.hpe.com/nimble-dcs/hci-toolbox/pull/331" target="_blank">https://github.hpe.com/nimble-dcs/hci-toolbox/pull/331</a>
+        </div>
+        <div class="form-group">
+            <label for="cdsdo">CDSDO</label>
+            <input type="text" id="cdsdo" placeholder="Enter the CDSDO URL">
+            <a href="https://jira.storage.hpecorp.net/browse/CDSDO-11603" target="_blank">https://jira.storage.hpecorp.net/browse/CDSDO-11603</a>
+        </div>
+        <button class="btn" onclick="generateOutput()">Generate</button>
+        <div class="output" id="output"></div>
+    </div>
+
+
+    <script>
+        function generateOutput() {
+            const service = document.getElementById('service').value;
+            const valuesFile = document.getElementById('values-file').value;
+            const chartVersion = document.getElementById('chart-version').value;
+            const hciToolboxPr = document.getElementById('hci-toolbox-pr').value;
+            const cdsdo = document.getElementById('cdsdo').value;
+
+            const output = `
+                Hi team,
+
+                Requesting deployment for the following service:
+
+                Service: ${service}
+                Values File: ${valuesFile}
+                Chart Version: ${chartVersion}
+                HCI-Toolbox PR: <a href="${hciToolboxPr}" target="_blank">${hciToolboxPr}</a>
+                CDSDO: <a href="${cdsdo}" target="_blank">${cdsdo}</a>
+
+                Please proceed with the deployment at the earliest.
+
+                Thanks.
+            `;
+
+            document.getElementById('output').innerHTML = output;
+        }
+    </script>
 </body>
-
 </html>
-
